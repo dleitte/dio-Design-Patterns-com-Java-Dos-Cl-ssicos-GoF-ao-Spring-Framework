@@ -1,0 +1,39 @@
+public class OrderManager {
+    private static OrderManager instance;
+    private List<Order> orders;
+
+    private OrderManager() {
+        orders = new ArrayList<>();
+    }
+
+    public static synchronized OrderManager getInstance() {
+        if (instance == null) {
+            instance = new OrderManager();
+        }
+        return instance;
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+        notifyObservers(order);
+    }
+
+    // Métodos para gerenciar pedidos...
+
+    // Lista de observadores
+    private List<OrderObserver> observers = new ArrayList<>();
+
+    public void addObserver(OrderObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(OrderObserver observer) {
+        observers.remove(observer);
+    }
+
+    private void notifyObservers(Order order) {
+        for (OrderObserver observer : observers) {
+            observer.update(order);
+        }
+    }
+}

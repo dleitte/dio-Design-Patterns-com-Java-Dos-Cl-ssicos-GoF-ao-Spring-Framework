@@ -1,0 +1,24 @@
+public class Main {
+    public static void main(String[] args) {
+        OrderManager orderManager = OrderManager.getInstance();
+
+        Customer customer1 = new Customer("Alice");
+        Customer customer2 = new Customer("Bob");
+
+        orderManager.addObserver(customer1);
+        orderManager.addObserver(customer2);
+
+        DishFactory pizzaFactory = new PizzaFactory();
+        Dish pizza = pizzaFactory.createDish();
+        pizza = new CheeseDecorator(pizza);
+
+        Order order1 = new Order(pizza);
+        orderManager.addOrder(order1);
+
+        order1.setStatus("Preparando");
+        orderManager.addOrder(order1);
+
+        order1.setStatus("Entregue");
+        orderManager.addOrder(order1);
+    }
+}

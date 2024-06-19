@@ -1,0 +1,35 @@
+abstract class DishDecorator extends Dish {
+    public abstract String getDescription();
+}
+
+class CheeseDecorator extends DishDecorator {
+    Dish dish;
+
+    public CheeseDecorator(Dish dish) {
+        this.dish = dish;
+    }
+
+    public String getDescription() {
+        return dish.getDescription() + ", Cheese";
+    }
+
+    public double cost() {
+        return dish.cost() + 0.99;
+    }
+}
+
+class PepperoniDecorator extends DishDecorator {
+    Dish dish;
+
+    public PepperoniDecorator(Dish dish) {
+        this.dish = dish;
+    }
+
+    public String getDescription() {
+        return dish.getDescription() + ", Pepperoni";
+    }
+
+    public double cost() {
+        return dish.cost() + 1.49;
+    }
+}
